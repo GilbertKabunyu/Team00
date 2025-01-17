@@ -5,6 +5,7 @@ function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  //Event listener to remove item from Local Storage
   document.getElementById("880RR").addEventListener("click", removeCartItem());
 }
 
@@ -29,8 +30,11 @@ function cartItemTemplate(item) {
 }
 
 function removeCartItem() {
+  //Gets the items from the local storage
   const storedItem = getLocalStorage("so-cart" || []);
+  //Updates the localStorage by removing the object with the Item.Id searched
   const updatedItem = storedItem.filter((item) => item.Id !== item.Id);
+  //Sends the updated version to the localStorage.
   setLocalStorage("so-cart", updatedItem);
 }
 
