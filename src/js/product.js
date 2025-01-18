@@ -10,7 +10,7 @@ const product = new ProductDetails(productId, dataSource);
 product.init();
 
 function addProductToCart(product) {
- console.log(product);
+ //console.log(product);
   setLocalStorage("so-cart", product);
 }
 // add to cart button event handler
