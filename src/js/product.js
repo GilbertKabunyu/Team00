@@ -4,12 +4,13 @@ import { setLocalStorage, getParams } from "./utils.mjs";
 
 const dataSource = new ProductData("tents");
 const productId = getParams("product");
+//console.log(dataSource.findProductById(productId));
 
 const product = new ProductDetails(productId, dataSource);
 product.init();
 
 function addProductToCart(product) {
-  console.log(product);
+ console.log(product);
   setLocalStorage("so-cart", product);
 }
 // add to cart button event handler
