@@ -65,7 +65,6 @@ function removeCartItem(event) {
   if (cartItem) {
     cartItem.parentNode.removeChild(cartItem);
   }
-
   // Update the cart count after removing the item
   updateCartCount();
 }
