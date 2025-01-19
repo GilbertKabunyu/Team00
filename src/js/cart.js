@@ -25,17 +25,54 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
-//funtion to update the a number in the backpack
+// Function to update the number in the cart
 function updateCartCount() {
-  //obtain the articles from localstorage
+  // Obtain the articles from localStorage
   const cartItems = getLocalStorage("so-cart") || [];
-  //calculate the total items
+  // Calculate the total items
   const totalItems = cartItems.length;
-  //update the number in the html element with the"cart-count" class
+  // Update the number in the HTML element with the "cart-count" class
   const cartCountElement = document.querySelector(".cart-count");
   if (cartCountElement) {
     cartCountElement.textContent = totalItems;
   }
 }
+
+// Function to remove an item from the cart
+function removeCartItem(event) {
+  // Prevent event bubbling
+  const buttonElement = event.target.closest(".remove-button");
+  const itemId = buttonElement.id; // Gets the ID of the button which is the ID of the product.
+
+  // Get the items from localStorage
+  const storedItem = getLocalStorage("so-cart") || [];
+
+  // Update localStorage by removing the object with the matching itemId
+  const updatedItem = storedItem.filter((item) => item.Id !== itemId);
+
+  // Update localStorage with the new array
+  setLocalStorage("so-cart", updatedItem);
+
+  // Find the closest .cart-card class to remove it
+  const cartItem = buttonElement.closest(".cart-card");
+
+  // Remove the li element to update the cart visually
+  if (cartItem) {
+    cartItem.parentNode.removeChild(cartItem);
+  }
+
+  // Update the cart count after removing the item
+  updateCartCount();
+}
+
+// Render the contents of the cart
 renderCartContents();
+
+// Update the cart count on page load
 updateCartCount();
+
+// Add event listener to remove items from localStorage
+const removeButtons = document.querySelectorAll(".remove-button");
+removeButtons.forEach((button) => {
+  button.addEventListener("click", removeCartItem);
+});
