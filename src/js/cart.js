@@ -36,7 +36,6 @@ function updateCartCount() {
   if (cartCountElement) {
     cartCountElement.textContent = totalItems;
   }
-  
 }
 renderCartContents();
 updateCartCount();
