@@ -5,16 +5,6 @@ function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
-  //Event listener to remove item from Local Storage
-  const removeButtons = document.querySelectorAll(".remove-button");
-  removeButtons.forEach((button) => {
-    button.addEventListener("click", removeCartItem);
-  })
-  //if (document.getElementById("880RR") === null) {
-  //  console.log("There is no items in the cart list");
-  //} else {
-//document.getElementById("880RR").addEventListener("click", removeCartItem);
-  //}
 }
 
 function cartItemTemplate(item) {
@@ -38,13 +28,33 @@ function cartItemTemplate(item) {
 }
 
 function removeCartItem(event) {
-  const itemId = event.target.id
+  //This makes sure that the event is not a event bubbling
+  //It looks like that event bubbling is when an event occurs on an element, it also propagates(bubbles up) to its parent elements.
+  //So basicaly, instead of taking the Id of the button, I was getting the Id of li element.
+  const buttonElement = event.target.closest(".remove-button");
+  const itemId = buttonElement.id; //Gets the ID of the button which is the Id of the product.
+
   //Gets the items from the local storage
   const storedItem = getLocalStorage("so-cart" || []);
+
   //Updates the localStorage by removing the object with the Item.Id searched
   const updatedItem = storedItem.filter((item) => item.Id !== itemId);
+
   //Sends the updated version to the localStorage.
-  setLocalStorage("so-cart", updatedItem);
+  const test = setLocalStorage("so-cart", updatedItem);
+
+  //Find the closest .cart-card class to remove it
+  const cartItem = buttonElement.closest(".cart-card");
+
+  //Removes the whole li element to make cart look updated.
+  if (cartItem) {
+    cartItem.parentNode.removeChild(cartItem);
+  }
 }
 
 renderCartContents();
+//Event listener to remove item from Local Storage. It needs to be outside so that the event is put, after the whole page is rendered.
+const removeButtons = document.querySelectorAll(".remove-button");
+removeButtons.forEach((button) => {
+  button.addEventListener("click", removeCartItem);
+});
