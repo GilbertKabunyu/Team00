@@ -6,8 +6,8 @@ const dataSource = new ProductData("tents");
 const productId = getParams("product");
 //console.log(dataSource.findProductById(productId));
 
-const product = new ProductDetails(productId, dataSource);
-product.init();
+const productInfo = new ProductDetails(productId, dataSource);
+productInfo.init();
 
 
 function addProductToCart(product) {
