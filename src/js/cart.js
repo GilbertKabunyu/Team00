@@ -44,8 +44,60 @@ function cartItemTemplate(item) {
 }
 
 
+
 renderCartContents();
-=======
+
+// Function to update the number in the cart
+function updateCartCount() {
+  // Obtain the articles from localStorage
+  const cartItems = getLocalStorage("so-cart") || [];
+  // Calculate the total items
+  const totalItems = cartItems.length;
+  // Update the number in the HTML element with the "cart-count" class
+  const cartCountElement = document.querySelector(".cart-count");
+  if (cartCountElement) {
+    cartCountElement.textContent = totalItems;
+  }
+}
+
+// Function to remove an item from the cart
+function removeCartItem(event) {
+  // Prevent event bubbling
+  const buttonElement = event.target.closest(".remove-button");
+  const itemId = buttonElement.id; // Gets the ID of the button which is the ID of the product.
+
+  // Get the items from localStorage
+  const storedItem = getLocalStorage("so-cart") || [];
+
+  // Update localStorage by removing the object with the matching itemId
+  const updatedItem = storedItem.filter((item) => item.Id !== itemId);
+
+  // Update localStorage with the new array
+  setLocalStorage("so-cart", updatedItem);
+
+  // Find the closest .cart-card class to remove it
+  const cartItem = buttonElement.closest(".cart-card");
+
+  // Remove the li element to update the cart visually
+  if (cartItem) {
+    cartItem.parentNode.removeChild(cartItem);
+  }
+  // Update the cart count after removing the item
+  updateCartCount();
+}
+
+// Render the contents of the cart
+renderCartContents();
+
+// Update the cart count on page load
+updateCartCount();
+
+// Add event listener to remove items from localStorage
+const removeButtons = document.querySelectorAll(".remove-button");
+removeButtons.forEach((button) => {
+  button.addEventListener("click", removeCartItem);
+});
+
 function removeCartItem(event) {
   //This makes sure that the event is not a event bubbling
   //It looks like that event bubbling is when an event occurs on an element, it also propagates(bubbles up) to its parent elements.
