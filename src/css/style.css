@@ -237,6 +237,23 @@ button {
   grid-column: 3;
 }
 
+
+/******** cart total display *****/
+.cart-footer {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-evenly;
+  margin: 1rem;
+}
+
+.price-total {
+  font-weight: bold;
+  text-align: inherit;
+  font-size: larger;
+}
+
+
+
 .remove-button {
   grid-row: 1;
   grid-column: 4;
