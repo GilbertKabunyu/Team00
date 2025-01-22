@@ -41,13 +41,4 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
     parentElement.innerHTML = " ";
   }
   parentElement.insertAdjacentHTML  (position, htmlStrings.join(""));
-}
-export function renderListWithTemplate(productCardTemplate, parentElement, list, position = "afterbegin", clear = false) {
-  if (clear == true) {
-    while (parentElement.hasChildNodes()) {
-      parentElement.removeChild(parentElement.firstChild);
-    }
-  } else {
-    const newList = list;
-    parentElement.insertAdjacentHTML(position, newList.map((item) => productCardTemplate(item)).join(""));
-  }}
+};

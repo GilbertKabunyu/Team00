@@ -17,6 +17,7 @@ function renderCartContents() {
   }
 }
 
+//item.quantity does not exist, probably an if statement would fix it. if (itemQuantity in localStorage with the same ID) = item.count(ID)
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider" data-id="${item.id}">
   <a href="#" class="cart-card__image">
@@ -30,11 +31,10 @@ function cartItemTemplate(item) {
   </a>
 
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: ${item.quantity}</p>
+  <p class="cart-card__quantity">qty: ${item.Quantity}</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: 1</p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
     <button class="remove-button" id="${item.Id}" type="button"><span>X</span></button>
 
@@ -42,10 +42,6 @@ function cartItemTemplate(item) {
 
   return newItem;
 }
-
-
-
-renderCartContents();
 
 // Function to update the number in the cart
 function updateCartCount() {
@@ -86,13 +82,7 @@ function removeCartItem(event) {
   updateCartCount();
 }
 
-// Render the contents of the cart
-renderCartContents();
-
-// Update the cart count on page load
-updateCartCount();
-
-function removeCartItem(event) {
+/*function removeCartItem(event) {
   //This makes sure that the event is not a event bubbling
   //It looks like that event bubbling is when an event occurs on an element, it also propagates(bubbles up) to its parent elements.
   //So basicaly, instead of taking the Id of the button, I was getting the Id of li element.
@@ -115,7 +105,7 @@ function removeCartItem(event) {
   if (cartItem) {
     cartItem.parentNode.removeChild(cartItem);
   }
-}
+}*/
 
 renderCartContents();
 //Event listener to remove item from Local Storage. It needs to be outside so that the event is put, after the whole page is rendered.

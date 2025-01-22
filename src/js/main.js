@@ -13,8 +13,6 @@ const lista = new ProductListing("tents", dataSource, listElement);
 lista.init();
 //lista.renderList();
 
-import ProductListing from "./productList.mjs";
-
 const productData = new ProductData("tents");
 const example = document.querySelector(".product-list");
 const productList = new ProductListing(
