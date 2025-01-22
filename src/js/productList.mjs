@@ -6,6 +6,7 @@ function filterData(data) {
     }
 }
 
+// This function is being run 2 times in a row, that's why it is printing 2 time the tents.
 export function productCardTemplate(product) {
     if (product.FinalPrice < product.SuggestedRetailPrice) {
         const newItem = `<li class="product-card">
