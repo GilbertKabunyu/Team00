@@ -33,6 +33,15 @@ export function getParams(param) {
   return product
 }
 
+
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  const htmlStrings = list.map(templateFn);
+  if(clear){
+    parentElement.innerHTML = " ";
+  }
+  parentElement.insertAdjacentHTML  (position, htmlStrings.join(""));
+}
+
 export function renderListWithTemplate(productCardTemplate, parentElement, list, position = "afterbegin", clear = false) {
   if (clear == true) {
     while (parentElement.hasChildNodes()) {
