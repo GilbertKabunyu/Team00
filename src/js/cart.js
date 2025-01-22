@@ -92,12 +92,6 @@ renderCartContents();
 // Update the cart count on page load
 updateCartCount();
 
-// Add event listener to remove items from localStorage
-const removeButtons = document.querySelectorAll(".remove-button");
-removeButtons.forEach((button) => {
-  button.addEventListener("click", removeCartItem);
-});
-
 function removeCartItem(event) {
   //This makes sure that the event is not a event bubbling
   //It looks like that event bubbling is when an event occurs on an element, it also propagates(bubbles up) to its parent elements.
