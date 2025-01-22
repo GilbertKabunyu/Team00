@@ -5,7 +5,9 @@ import {
 } from "./utils.mjs";
 import ShoppingCart from "./ShoppingCart.mjs";
 
+
 //Event listener to remove item from Local Storage. It needs to be outside so that the event is put, after the whole page is rendered.
+
 
 const shoppingCart = new ShoppingCart(
   "so-cart",
@@ -15,4 +17,7 @@ const shoppingCart = new ShoppingCart(
 shoppingCart.renderCartContents();
 shoppingCart.cartItemRemove();
 
+
 loadHeaderFooter();
+
+
