@@ -57,7 +57,6 @@ export default class ShoppingCart {
     const cartItems = getLocalStorage(this.key);
     if (cartItems.length >= 1) {
       const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-      console.log(htmlItems);
       document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
     } else {
       emptyCart.textContent = "You Have No Added Items In Your Cart";
