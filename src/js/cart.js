@@ -15,4 +15,5 @@ const shoppingCart = new ShoppingCart(
 shoppingCart.renderCartContents();
 shoppingCart.cartItemRemove();
 
+
 loadHeaderFooter();
