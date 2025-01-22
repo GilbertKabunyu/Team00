@@ -125,7 +125,7 @@ button {
 .cart:hover svg {
   fill: gray;
 }
-.cart-count{
+.cart-count {
   background-color: orange;
   color: white;
   font-weight: bold;
@@ -237,7 +237,6 @@ button {
   grid-column: 3;
 }
 
-
 /******** cart total display *****/
 .cart-footer {
   display: none;
@@ -251,8 +250,6 @@ button {
   text-align: inherit;
   font-size: larger;
 }
-
-
 
 .remove-button {
   grid-row: 1;
