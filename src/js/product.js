@@ -11,24 +11,16 @@ productInfo.init();
 
 
 function addProductToCart(product) {
- //console.log(product);
+  console.log(`This is the product: ${product}`);
   setLocalStorage("so-cart", product);
 }
 
 // add to cart button event handler
-//async function addToCartHandler(e) {
-//  const nProduct = await dataSource.findProductById(e.target.dataset.id);
-//  addProductToCart(nProduct);
-//}
-
-// add listener to Add to Cart button
-
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
-
-  
-
+async function addToCartHandler(e) {
+  const nProduct = await dataSource.findProductById(e.target.dataset.id);
+  addProductToCart(nProduct);
+}
+// removed it since this event listener is already on the productDetails.mjs on the async init function.
 //document
 //  .getElementById("addToCart")
 //  .addEventListener("click", addToCartHandler);
