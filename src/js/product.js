@@ -1,6 +1,6 @@
-import ProductDetails from "./productDetails.mjs";
 import ProductData from "./ProductData.mjs";
-import { setLocalStorage, getParams } from "./utils.mjs";
+import ProductDetails from "./ProductDetails.mjs"
+import { getParams } from "./utils.mjs";
 
 const dataSource = new ProductData("tents");
 const productId = getParams("product");
@@ -8,13 +8,19 @@ const productId = getParams("product");
 const productInfo = new ProductDetails(productId, dataSource);
 productInfo.init();
 
-// add to cart button event handler
-async function addToCartHandler(e) {
-  const product = await dataSource.findProductById(e.target.dataset.id);
-  addProductToCart(product);
+
+function addProductToCart(product) {
+  console.log(`This is the product: ${product}`);
+  setLocalStorage("so-cart", product);
 }
 
-// add listener to Add to Cart button
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+// add to cart button event handler
+async function addToCartHandler(e) {
+  const nProduct = await dataSource.findProductById(e.target.dataset.id);
+  addProductToCart(nProduct);
+}
+// removed it since this event listener is already on the productDetails.mjs on the async init function.
+//document
+//  .getElementById("addToCart")
+//  .addEventListener("click", addToCartHandler);
+

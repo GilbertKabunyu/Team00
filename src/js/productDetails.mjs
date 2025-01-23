@@ -1,6 +1,19 @@
 import { setLocalStorage } from "./utils.mjs";
 import { getLocalStorage } from "./utils.mjs";
 
+//funtion to update the a number in the backpack
+function updateCartCount() {
+  //obtain the articles from localstorage
+  const cartItems = getLocalStorage("so-cart") || [];
+  //calculate the total items
+  const totalItems = cartItems.length;
+  //update the number in the html element with the"cart-count" class
+  const cartCountElement = document.querySelector(".cart-count");
+  if (cartCountElement) {
+    cartCountElement.textContent = totalItems;
+  }
+}
+
 export default class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
@@ -15,7 +28,6 @@ export default class ProductDetails {
     this.renderProductDetails(this.product);
     // once the HTML is rendered we can add a listener to Add to Cart button
     // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
-    console.log(this);
     document.getElementById('addToCart')
       .addEventListener('click', () => { this.addProductToCart(this.product) });
   }
@@ -42,7 +54,7 @@ export default class ProductDetails {
   
         <p class="product-card__price">${product.FinalPrice}</p>
   
-        <p class="product__color">${product.Colors.ColorName}</p>
+        <p class="product__color">${product.Colors[0].ColorName}</p>
   
         <p class="product__description">${product.DescriptionHtmlSimple}</p>
   
@@ -53,3 +65,4 @@ export default class ProductDetails {
     html.innerHTML = newProduct;
   }
 }
+updateCartCount()
