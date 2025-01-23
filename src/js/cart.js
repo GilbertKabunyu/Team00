@@ -1,8 +1,4 @@
-import {
-  getLocalStorage,
-  loadHeaderFooter,
-  setLocalStorage,
-} from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 import ShoppingCart from "./ShoppingCart.mjs";
 
 //Event listener to remove item from Local Storage. It needs to be outside so that the event is put, after the whole page is rendered.
@@ -12,7 +8,6 @@ const shoppingCart = new ShoppingCart(
   ".product-list",
   ".remove-button",
 );
-shoppingCart.renderCartContents();
-shoppingCart.cartItemRemove();
+shoppingCart.init();
 
 loadHeaderFooter();
