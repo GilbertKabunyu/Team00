@@ -1,10 +1,16 @@
-import { renderListWithTemplate } from "./utils.mjs";
+import {renderListWithTemplate} from "./utils.mjs";
 
-function filterData(data) {
-    if (data.Id == "880RR" || data.Id == "985RF" || data.Id ==  "985PR" || data.Id ==  "344YJ") {
-        return data;
-    }
+function productCardTemplate(product) {
+  return `<li class="product-card">
+    <a href="product_pages/index.html?product=">
+      <img src="${product.Image}" alt="Image of ">
+      <h3 class="card__brand">${product.Brand.Name}</h3>
+      <h2 class="card__name">${product.Name}</h2>
+      <p class="product-card__price">${product.FinalPrice}</p>
+    </a>
+  </li>`
 }
+
 
 export function productCardTemplate(product) {
     if (product.FinalPrice < product.SuggestedRetailPrice) {
@@ -41,14 +47,6 @@ export function productCardTemplate(product) {
 
 
 
-
-export default class ProductListing {
-    constructor (category, dataSource, listElement) {
-        this.category = category;
-        this.dataSource = dataSource;
-        this.listElement = listElement;
-    }
-    async init() {
         
         const list = await this.dataSource.getData(this.category);
         const productHeaderCategory = document.querySelector(".product-header-category");
@@ -65,3 +63,4 @@ export default class ProductListing {
         elem.insertAdjacentHTML("afterbegin", productHeaderCategory);
     }
 }
+
