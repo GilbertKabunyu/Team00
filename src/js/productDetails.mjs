@@ -6,7 +6,7 @@ function updateCartCount() {
   //obtain the articles from localstorage
   const cartItems = getLocalStorage("so-cart") || [];
   //calculate the total items
-  const totalItems =cartItems.length;
+  const totalItems = cartItems.length;
   //update the number in the html element with the"cart-count" class
   const cartCountElement = document.querySelector(".cart-count");
   if (cartCountElement) {
