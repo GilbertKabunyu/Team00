@@ -4,18 +4,19 @@ function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
-      alt="${item.Name}"
+      src="${item.Result.Images.PrimarySmall}"
+      alt="${item.Result.Name}"
     />
   </a>
   <a href="#">
-    <h2 class="card__name">${item.Name}</h2>
+    <h2 class="card__name">${item.Result.Name}</h2>
   </a>
-    <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: 1</p>
-    <p class="cart-card__price">$${item.FinalPrice}</p>
-    <button class="remove-button" id="${item.Id}" type="button"><span>X</span></button>
+    <p class="cart-card__color">${item.Result.Colors[0].ColorName}</p>
+    <p class="cart-card__quantity">qty: <input class="qty-input" type="number" value=1 step=1></p>
+    <p class="cart-card__price">$${item.Result.FinalPrice}</p>
+    <button class="remove-button" id="${item.Result.Id}" type="button"><span>X</span></button>
 </li>`;
+console.log(item.Result.Id);
 
   return newItem;
 }
@@ -29,12 +30,16 @@ function removeCartItem(event) {
   
     //Gets the items from the local storage
     const storedItem = getLocalStorage("so-cart" || []);
+    console.log(storedItem);
   
     //Updates the localStorage by removing the object with the Item.Id searched
-    const updatedItem = storedItem.filter((item) => item.Id !== itemId);
+    const updatedItem = storedItem.filter((item) => item.Result.Id !== itemId);
+    console.log(updatedItem);
   
     //Sends the updated version to the localStorage.
     const test = setLocalStorage("so-cart", updatedItem);
+    const totalP = document.querySelector(".total-p");
+    totalP.innerHTML = `$${updatedItem.reduce((acc, item) => acc + item.Result.FinalPrice, 0).toFixed(2)}`;
   
     //Find the closest .cart-card class to remove it
     const cartItem = buttonElement.closest(".cart-card");
@@ -53,20 +58,29 @@ export default class ShoppingCart {
     this.removeSelector = removeSelector;
   }
   renderCartContents() {
+    const totalP = document.querySelector(".total-p");
+    const totalContainer = document.querySelector(".total-container");
     const emptyCart = document.querySelector(".empty-cart");
     const cartItems = getLocalStorage(this.key);
     if (cartItems.length >= 1) {
       const htmlItems = cartItems.map((item) => cartItemTemplate(item));
       document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
+      totalP.innerHTML = `$${cartItems.reduce((acc, item) => acc + item.Result.FinalPrice, 0).toFixed(2)}`;
     } else {
       emptyCart.textContent = "You Have No Added Items In Your Cart";
+      totalContainer.style.display = "none";
     }
   }
   cartItemRemove() {
+    
+  }
+  init() {
+    this.renderCartContents();
     const ram = document.querySelectorAll(this.removeSelector);
     ram.forEach((button) => {
       button.addEventListener("click", removeCartItem);
     });
+    
   }
   
 }

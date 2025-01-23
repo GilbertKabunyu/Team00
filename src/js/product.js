@@ -2,7 +2,7 @@ import ProductDetails from "./ProductDetails.mjs";
 import ProductData from "./ProductData.mjs";
 import { getParams, loadHeaderFooter } from "./utils.mjs";
 
-const dataSource = new ProductData("tents");
+const dataSource = new ProductData();
 const productId = getParams("product");
 //console.log(dataSource.findProductById(productId));
 
