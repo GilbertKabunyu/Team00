@@ -1,5 +1,5 @@
-import ProductDetails from "./ProductDetails.mjs";
-import ProductData from "./ProductData.mjs";
+import ProductDetails from "./productDetails.mjs";
+import ProductData from "./productData.mjs";
 import { getParams, loadHeaderFooter } from "./utils.mjs";
 
 const dataSource = new ProductData();
