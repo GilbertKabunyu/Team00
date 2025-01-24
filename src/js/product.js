@@ -1,4 +1,4 @@
-import ProductDetails from "./productDetails.mjs";
+import ProductListing from "./productList.mjs";
 import ProductData from "./productData.mjs";
 import { getParams, loadHeaderFooter } from "./utils.mjs";
 
@@ -6,7 +6,7 @@ const dataSource = new ProductData();
 const productId = getParams("product");
 //console.log(dataSource.findProductById(productId));
 
-const productInfo = new ProductDetails(productId, dataSource);
+const productInfo = new ProductListing(productId, dataSource);
 productInfo.init();
 loadHeaderFooter();
 // add to cart button event handler
