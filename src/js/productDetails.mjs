@@ -52,3 +52,47 @@ export default class ProductDetails {
     html.innerHTML = newProduct;
   }
 }
+
+
+
+product:
+
+import ProductDetails from "./productDetails.mjs";
+import ProductData from "./productData.mjs";
+import { getParams, loadHeaderFooter } from "./utils.mjs";
+import ProductListing from "./productList.mjs";
+
+const dataSource = new ProductData();
+const productId = getParams("product");
+//console.log(dataSource.findProductById(productId));
+
+const productInfo = new ProductDetails(productId, dataSource);
+productInfo.init();
+loadHeaderFooter();
+// add to cart button event handler
+//async function addToCartHandler(e) {
+//  const nProduct = await dataSource.findProductById(e.target.dataset.id);
+//  addProductToCart(nProduct);
+//}
+
+// add listener to Add to Cart button
+
+//document
+//  .getElementById("addToCart")
+//  .addEventListener("click", addToCartHandler);
+
+
+product - listning
+import ProductData from "./productData.mjs";
+
+import ProductListing from "./productList.mjs";
+import { loadHeaderFooter, getParams } from "./utils.mjs";
+
+const category = getParams("category");
+
+const productData = new ProductData();
+const example = document.querySelector(".product-list");
+const productList = new ProductListing(category, productData, example);
+
+productList.init();
+loadHeaderFooter();
