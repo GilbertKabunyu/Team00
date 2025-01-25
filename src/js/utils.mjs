@@ -32,3 +32,41 @@ export function getParams(param) {
   const product = urlParams.get(param)
   return product
 }
+
+
+
+
+export function renderListWithTemplate(productCardTemplate, parentElement, list, position = "afterbegin", clear = false) {
+  if (clear == true) {
+    while (parentElement.hasChildNodes()) {
+      parentElement.removeChild(parentElement.firstChild);
+    }
+  } else {
+    const newList = list;
+    parentElement.insertAdjacentHTML(position, newList.map((item) => productCardTemplate(item)).join(""));
+  }
+}
+
+function renderWithTemplate(template, parentElement, position = "afterbegin", clear = false) {
+  const newTemplate = template.content.cloneNode(true);
+  parentElement.appendChild(newTemplate);
+}
+
+export async function loadHeaderFooter () {
+  const header = document.querySelector('#main-header');
+  const footer = document.querySelector('#main-footer');
+  const footerPath = "/partials/footer.html";
+  const headerPath = "/partials/header.html";
+  const footerTemplate = await loadTemplate(footerPath);
+  const headerTemplate = await loadTemplate(headerPath);
+  renderWithTemplate(headerTemplate, header);
+  renderWithTemplate(footerTemplate, footer);
+}
+
+export async function loadTemplate (path) {
+  const response = await fetch(path);
+  const html = await response.text();
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return template;
+}

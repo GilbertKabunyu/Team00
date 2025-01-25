@@ -125,6 +125,17 @@ button {
 .cart:hover svg {
   fill: gray;
 }
+.cart-count {
+  background-color: orange;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 50%;
+  padding: 4px 4px;
+  position: absolute;
+  top: 10px;
+  right: 19px;
+}
 
 /* End cart icon styles */
 
@@ -226,6 +237,20 @@ button {
   grid-column: 3;
 }
 
+/******** cart total display *****/
+.cart-footer {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-evenly;
+  margin: 1rem;
+}
+
+.price-total {
+  font-weight: bold;
+  text-align: inherit;
+  font-size: larger;
+}
+
 .remove-button {
   grid-row: 1;
   grid-column: 4;
@@ -233,6 +258,76 @@ button {
   padding: 8px;
   border-radius: 10px;
   font-size: 17px;
+}
+/*made a grid for the src/index.html product icons*/
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 4rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.product-container img {
+  width: 100%;
+  height: auto;
+}
+.product-container p {
+  text-align: center;
+  margin-top: 0;
+}
+.product-container a {
+  text-decoration: none;
+  color: var(--dark-grey);
+}
+.product-container a:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+.prod-cat {
+  font-variant: small-caps;
+  color: var(--primary-color);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/*Added colors to the discount*/
+.discount-price-p {
+  color: var(--secondary-color);
+}
+.discount-price-span {
+  color: red;
+}
+
+/*Added styling to the total amount for cart items*/
+.total-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 1rem;
+  border: 1px solid var(--light-grey);
+  background-color: var(--light-grey);
+  border-radius: 10px;
+  font-size: 1.5rem;
+}
+
+.total-p {
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+/*Added styling to qty input*/
+.qty-input {
+  width: 50px;
+  padding: 5px;
+  border: 1px solid var(--light-grey);
+  border-radius: 5px;
+  display: block;
+}
+
+.cart-card__quantity {
+  display: block;
 }
 
 @media screen and (min-width: 500px) {
