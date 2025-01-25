@@ -29,8 +29,10 @@ export default class ProductDetails {
 
   renderProductDetails(product) {
     const html = document.querySelector(".product-detail")
-    
-    const newProduct = `<section class="product-detail">
+    if (product.Result.FinalPrice < product.Result.SuggestedRetailPrice) {
+      //added the discount flag on the product details page
+      const newProduct = `<section class="product-detail">
+        <p class="product__discount">⚑ Discount: <span class="discount-price-span">${(((product.Result.SuggestedRetailPrice-product.Result.FinalPrice)/product.Result.SuggestedRetailPrice)*100).toFixed(2)}% off (-${(product.Result.SuggestedRetailPrice-product.Result.FinalPrice).toFixed(2)})</span></p>
         <h3>${product.Result.Brand.Name}</h3>
   
         <h2 class="divider">${product.Result.Name}</h2>
@@ -52,5 +54,30 @@ export default class ProductDetails {
         </div>
       </section>`
     html.innerHTML = newProduct;
+    } else {
+      const newProduct = `<section class="product-detail">
+        <h3>${product.Result.Brand.Name}</h3>
+  
+        <h2 class="divider">${product.Result.Name}</h2>
+  
+        <img
+          class="divider"
+          src="${product.Result.Images.PrimaryLarge}"
+          alt="${product.Result.Name}"
+        />
+  
+        <p class="product-card__price">${product.Result.FinalPrice}</p>
+  
+        <p class="product__color">${product.Result.Colors[0].ColorName}</p>
+  
+        <p class="product__description">${product.Result.DescriptionHtmlSimple}</p>
+  
+        <div class="product-detail__add">
+          <button id="addToCart" data-id=${product.Result.Id}>Add to Cart</button>
+        </div>
+      </section>`
+      html.innerHTML = newProduct;
+    }
+    
   }
 }
