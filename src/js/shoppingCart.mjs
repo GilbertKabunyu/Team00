@@ -12,11 +12,10 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Result.Name}</h2>
   </a>
     <p class="cart-card__color">${item.Result.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: <input class="qty-input" type="number" value=1 step=1></p>
-    <p class="cart-card__price">$${item.Result.FinalPrice}</p>
+    <p class="cart-card__quantity">qty: <input class="qty-input" id=${item.Result.Id}  type="number" value=1 step=1 min=1></p>
+    <p class="cart-card__price id${item.Result.Id}">$${item.Result.FinalPrice}</p>
     <button class="remove-button" id="${item.Result.Id}" type="button"><span>X</span></button>
 </li>`;
-  console.log(item.Result.Id);
 
   return newItem;
 }
@@ -74,11 +73,54 @@ export default class ShoppingCart {
   cartItemRemove() {
 
   }
+
+  updateQty(itemId) {
+    const item = getLocalStorage("so-cart").find((item) => item.Result.Id === itemId);
+    const itemPrice = parseFloat(item.Result.FinalPrice);
+    const itemQty = document.querySelector(`.qty-input[id="${itemId}"]`);
+    const quantit = document.querySelectorAll(".qty-input");
+    console.log(itemQty);
+    const quantity = parseInt(document.querySelector(".qty-input").value);
+    const newPrice = itemPrice * quantity;
+    document.querySelector(`.id${itemId}`).textContent = `$${newPrice.toFixed(2)}`;
+    this.updateTotalPrice();
+    const qtyInput = document.querySelectorAll(".qty-input");
+
+  }
+
+  updateItemPrice(event) {
+    const input = event.target.closest(".qty-input");
+    const itemId = input.id;
+    const item = getLocalStorage("so-cart").find((item) => item.Result.Id === itemId);
+    const itemPrice = parseFloat(item.Result.FinalPrice);
+
+    const quantity = parseInt(input.value);
+
+    const newPrice = itemPrice * quantity;
+    document.querySelector(`.id${itemId}`).textContent = `$${newPrice.toFixed(2)}`;
+
+    // Optionally, update the total price
+    this.updateTotalPrice();
+  }
+
+  updateTotalPrice() {
+    const itemPrices = document.querySelectorAll('.cart-card__price');
+    let totalPrice = 0;
+    itemPrices.forEach(priceElement => {
+      totalPrice += parseFloat(priceElement.textContent.replace('$', ''));
+    });
+    document.querySelector('.total-p').textContent = `$${totalPrice.toFixed(2)}`;
+  }
+
   init() {
     this.renderCartContents();
     const ram = document.querySelectorAll(this.removeSelector);
     ram.forEach((button) => {
       button.addEventListener("click", removeCartItem);
+    });
+    const qtyInput = document.querySelectorAll(".qty-input");
+    qtyInput.forEach((input) => {
+      input.addEventListener("change", this.updateItemPrice.bind(this));
     });
 
   }

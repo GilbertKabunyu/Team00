@@ -325,6 +325,9 @@ button {
   border-radius: 5px;
   display: block;
 }
+.qty-input:invalid {
+  border: 1px solid red;
+}
 
 .cart-card__quantity {
   display: block;
