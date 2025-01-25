@@ -1,44 +1,23 @@
 import {renderListWithTemplate} from "./utils.mjs";
 
-
-
-export function productCardTemplate(product) {
-    if (product.FinalPrice < product.SuggestedRetailPrice) {
-        const newItem = `<li class="product-card">
-            <a href="../product_pages/?product=${product.Id}">
-              <img
-                src="${product.Images.PrimaryMedium}"
-                alt="${product.Name}"
-              />
-              <h3 class="card__brand">${product.Brand.Name}</h3>
-              <h2 class="card__name">${product.Name}</h2>
-              <p> Suggested Price: ${product.SuggestedRetailPrice}</p>
-              <p class="discount-price-p">Discount: <span class="discount-price-span">${(((product.SuggestedRetailPrice-product.FinalPrice)/product.SuggestedRetailPrice)*100).toFixed(2)}% off (-${(product.SuggestedRetailPrice-product.FinalPrice).toFixed(2)})</span></p></a>
-              <p class="product-card__price">Final Price: ${product.FinalPrice}</p>
-          </li>`
-        return newItem;
-    } else {
-        const newItem = `<li class="product-card">
-        <a href="../product_pages/?product=${product.Id}">
-        <img
-            src="${product.Image}"
-            alt="${product.Name}"
-        />
-        <h3 class="card__brand">${product.Brand.Name}</h3>
-        <h2 class="card__name">${product.Name}</h2>
-        <p class="product-card__price">${product.FinalPrice}</p></a
-        >
-        </li>`
-        return newItem;
-    }
-    
-    
+function productCardTemplate(product) {
+  return `<li class="product-card">
+    <a href="product_pages/index.html?product=">
+      <img src="${product.Image}" alt="Image of ">
+      <h3 class="card__brand">${product.Brand.Name}</h3>
+      <h2 class="card__name">${product.Name}</h2>
+      <p class="product-card__price">${product.FinalPrice}</p>
+    </a>
+  </li>`
 }
+
 export default class ProductListing {
-    constructor (category, dataSource, listElement) {
-        this.category = category;
-        this.dataSource = dataSource;
-        this.listElement = listElement;
+    constructor(category, dataSource, listElement) {
+      // We passed in this information to make our class as reusable as possible.
+      // Being able to define these things when we use the class will make it very flexible
+      this.category = category;
+      this.dataSource = dataSource;
+      this.listElement = listElement;
     }
     async init() {
         const list = await this.dataSource.getData(this.category);
