@@ -61,6 +61,8 @@ export async function loadHeaderFooter () {
   const headerTemplate = await loadTemplate(headerPath);
   renderWithTemplate(headerTemplate, header);
   renderWithTemplate(footerTemplate, footer);
+
+  searchProducts();
 }
 
 export async function loadTemplate (path) {
@@ -69,4 +71,32 @@ export async function loadTemplate (path) {
   const template = document.createElement('template');
   template.innerHTML = html;
   return template;
+}
+
+function searchProducts() {
+  const sButton = document.getElementById("searchButton");
+  sButton.addEventListener("click", function (e) {
+    const searchTerm = document.getElementById("searchInput").value;
+
+    performSearch(searchTerm);
+  });
+}
+
+export function performSearch(term) {
+  console.log("Performing search for:", term);
+
+  //URL with the search term as a query parameter
+  const searchParams = new URLSearchParams();
+  searchParams.append("category", term);
+
+  //get the current URL without the query string
+  const baseUrl = `${window.location.origin}/`;
+  console.log("Base URL:", baseUrl);
+
+  //construct the full Url
+  const newUrl = `product-listing/index.html?${searchParams.toString()}`;
+  console.log("New URL:", newUrl);
+
+  //navigate to new Url
+  window.location.href = baseUrl + newUrl;
 }

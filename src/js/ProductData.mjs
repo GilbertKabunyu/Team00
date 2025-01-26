@@ -26,4 +26,11 @@ export default class ProductData {
     return data
     //find((item) => item.Id === id);
   }
+  
+  async searchByTerm(term) {
+    const response = await fetch(`${baseURL}products/search?term=${term}`);
+    const data = await convertToJson(response);
+    return data.Result;
+  }
+
 }
