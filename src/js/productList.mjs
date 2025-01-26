@@ -48,11 +48,13 @@ export default class ProductListing {
         this.renderList(list);
         this.rendercategory(productHeaderCategory);
     }
-    renderList(list) {
-        renderListWithTemplate(productCardTemplate, this.listElement, list)
+    async renderList(list) {
+        await renderListWithTemplate(productCardTemplate, this.listElement, list)
     }
     rendercategory(elem) {
         const productHeaderCategory = `Top Product: <span class="prod-cat">${this.category}</span>`;
         elem.insertAdjacentHTML("afterbegin", productHeaderCategory);
     }
 }
+
+//ProductListig is getting an listElement = undifined

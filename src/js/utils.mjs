@@ -33,9 +33,6 @@ export function getParams(param) {
   return product
 }
 
-
-
-
 export function renderListWithTemplate(productCardTemplate, parentElement, list, position = "afterbegin", clear = false) {
   if (clear == true) {
     while (parentElement.hasChildNodes()) {
@@ -52,21 +49,42 @@ function renderWithTemplate(template, parentElement, position = "afterbegin", cl
   parentElement.appendChild(newTemplate);
 }
 
-export async function loadHeaderFooter () {
-  const header = document.querySelector('#main-header');
-  const footer = document.querySelector('#main-footer');
+export async function loadHeaderFooter() {
+  const header = document.querySelector("#main-header");
+  const footer = document.querySelector("#main-footer");
+
   const footerPath = "/partials/footer.html";
   const headerPath = "/partials/header.html";
+
   const footerTemplate = await loadTemplate(footerPath);
   const headerTemplate = await loadTemplate(headerPath);
+
   renderWithTemplate(headerTemplate, header);
   renderWithTemplate(footerTemplate, footer);
+  breadCrumb();
 }
 
-export async function loadTemplate (path) {
+
+export async function loadTemplate(path) {
   const response = await fetch(path);
   const html = await response.text();
-  const template = document.createElement('template');
+  const template = document.createElement("template");
   template.innerHTML = html;
   return template;
+}
+
+function breadCrumb() {
+  const link = document.getElementById("last-page-link");
+  link.textContent = window.location.search;
+  link.addEventListener("click", changeURL());
+}
+
+function changeURL() {
+  const path = window.location.pathname
+  if (path.has("category")) {
+    window.location.pathname = "/index.html";
+  }
+  else if ("product") {
+    history.back()
+  }
 }
