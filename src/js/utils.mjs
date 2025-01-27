@@ -1,3 +1,4 @@
+import { breadCrumb } from "./breadCrumbs";
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -61,6 +62,7 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, header);
   renderWithTemplate(footerTemplate, footer);
+
   breadCrumb();
 }
 
@@ -71,20 +73,4 @@ export async function loadTemplate(path) {
   const template = document.createElement("template");
   template.innerHTML = html;
   return template;
-}
-
-function breadCrumb() {
-  const link = document.getElementById("last-page-link");
-  link.textContent = window.location.search;
-  link.addEventListener("click", changeURL());
-}
-
-function changeURL() {
-  const path = window.location.pathname
-  if (path.has("category")) {
-    window.location.pathname = "/index.html";
-  }
-  else if ("product") {
-    history.back()
-  }
 }
