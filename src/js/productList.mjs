@@ -1,4 +1,4 @@
-import {renderListWithTemplate} from "./utils.mjs";
+import { renderListWithTemplate } from "./utils.mjs";
 
 
 
@@ -13,7 +13,7 @@ export function productCardTemplate(product) {
               <h3 class="card__brand">${product.Brand.Name}</h3>
               <h2 class="card__name">${product.Name}</h2>
               <p> Suggested Price: ${product.SuggestedRetailPrice}</p>
-              <p class="discount-price-p">Discount: <span class="discount-price-span">${(((product.SuggestedRetailPrice-product.FinalPrice)/product.SuggestedRetailPrice)*100).toFixed(2)}% off (-${(product.SuggestedRetailPrice-product.FinalPrice).toFixed(2)})</span></p></a>
+              <p class="discount-price-p">Discount: <span class="discount-price-span">${(((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice) * 100).toFixed(2)}% off (-${(product.SuggestedRetailPrice - product.FinalPrice).toFixed(2)})</span></p></a>
               <p class="product-card__price">Final Price: ${product.FinalPrice}</p>
           </li>`
         return newItem;
@@ -31,11 +31,11 @@ export function productCardTemplate(product) {
         </li>`
         return newItem;
     }
-    
-    
+
+
 }
 export default class ProductListing {
-    constructor (category, dataSource, listElement) {
+    constructor(category, dataSource, listElement) {
         this.category = category;
         this.dataSource = dataSource;
         this.listElement = listElement;
@@ -43,10 +43,15 @@ export default class ProductListing {
     async init() {
         const list = await this.dataSource.getData(this.category);
         const productHeaderCategory = document.querySelector(".product-header-category");
-        
+
         //let filteredlist = list.filter(filterData);
         this.renderList(list);
         this.rendercategory(productHeaderCategory);
+        const sortElement = document.getElementById("sort");
+        sortElement.addEventListener("change", (event) => {
+            const sortedList = this.sortList(list, event.target.value);
+            this.renderList(sortedList);
+        });
     }
     renderList(list) {
         renderListWithTemplate(productCardTemplate, this.listElement, list)
@@ -55,4 +60,14 @@ export default class ProductListing {
         const productHeaderCategory = `Top Product: <span class="prod-cat">${this.category}</span>`;
         elem.insertAdjacentHTML("afterbegin", productHeaderCategory);
     }
+
+    sortList(list, criteria) {
+        if (criteria === "name") {
+            return list.sort((a, b) => a.Name.localeCompare(b.Name));
+        } else if (criteria === "price") {
+            return list.sort((a, b) => a.FinalPrice - b.FinalPrice);
+        }
+        return list;
+    }
+
 }
