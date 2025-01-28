@@ -7,7 +7,7 @@ export function breadCrumb() {
         setLocalStorage("current-page", window.location.href);
 
     } else if (getLocalStorage("current-page") !== "/index.html" || getLocalStorage("current-page") !== "/") {
-        setLocalStorage("last-page", getLocalStorage("current-page") + getLocalStorage("list-items"));
+        setLocalStorage("last-page", getLocalStorage("current-page"));
         setLocalStorage("current-page", window.location.href);
 
         // This should be called whne selecting a product, but it isn't being called. You finish this and you're done.
