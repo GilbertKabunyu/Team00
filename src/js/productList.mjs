@@ -47,6 +47,11 @@ export default class ProductListing {
         //let filteredlist = list.filter(filterData);
         this.renderList(list);
         this.rendercategory(productHeaderCategory);
+        const sortElement = document.getElementById("sort");
+        sortElement.addEventListener("change", (event) => {
+            const sortedList = this.sortList(list, event.target.value);
+            this.renderList(sortedList);
+        });
     }
     async renderList(list) {
         await renderListWithTemplate(productCardTemplate, this.listElement, list)
@@ -55,6 +60,16 @@ export default class ProductListing {
         const productHeaderCategory = `Top Product: <span class="prod-cat">${this.category}</span>`;
         elem.insertAdjacentHTML("afterbegin", productHeaderCategory);
     }
+
+    sortList(list, criteria) {
+        if (criteria === "name") {
+            return list.sort((a, b) => a.Name.localeCompare(b.Name));
+        } else if (criteria === "price") {
+            return list.sort((a, b) => a.FinalPrice - b.FinalPrice);
+        }
+        return list;
+    }
+
 }
 
 //ProductListig is getting an listElement = undifined
