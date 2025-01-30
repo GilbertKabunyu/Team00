@@ -57,17 +57,21 @@ export default class ShoppingCart {
     this.removeSelector = removeSelector;
   }
   renderCartContents() {
+    const checkoutContainer = document.querySelector(".checkout-container");
     const totalP = document.querySelector(".total-p");
     const totalContainer = document.querySelector(".total-container");
     const emptyCart = document.querySelector(".empty-cart");
     const cartItems = getLocalStorage(this.key);
+    console.log(cartItems);
     if (cartItems.length >= 1) {
+      console.log(cartItems);  
       const htmlItems = cartItems.map((item) => cartItemTemplate(item));
       document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
       totalP.innerHTML = `$${cartItems.reduce((acc, item) => acc + item.Result.FinalPrice, 0).toFixed(2)}`;
     } else {
       emptyCart.textContent = "You Have No Added Items In Your Cart";
       totalContainer.style.display = "none";
+      checkoutContainer.style.display = "none";
     }
   }
   cartItemRemove() {
