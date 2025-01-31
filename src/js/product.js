@@ -4,6 +4,7 @@ import { getParams, loadHeaderFooter } from "./utils.mjs";
 
 const dataSource = new ExternalServices();
 const productId = getParams("product");
+
 //console.log(dataSource.findProductById(productId));
 
 const productInfo = new ProductDetails(productId, dataSource);

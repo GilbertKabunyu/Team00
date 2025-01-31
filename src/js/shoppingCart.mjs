@@ -21,33 +21,33 @@ function cartItemTemplate(item) {
 }
 
 function removeCartItem(event) {
-    //This makes sure that the event is not a event bubbling
-    //It looks like that event bubbling is when an event occurs on an element, it also propagates(bubbles up) to its parent elements.
-    //So basicaly, instead of taking the Id of the button, I was getting the Id of li element.
-    const buttonElement = event.target.closest(".remove-button");
-    const itemId = buttonElement.id; //Gets the ID of the button which is the Id of the product.
-  
-    //Gets the items from the local storage
-    const storedItem = getLocalStorage("so-cart" || []);
-    console.log(storedItem);
-  
-    //Updates the localStorage by removing the object with the Item.Id searched
-    const updatedItem = storedItem.filter((item) => item.Result.Id !== itemId);
-    console.log(updatedItem);
-  
-    //Sends the updated version to the localStorage.
-    const test = setLocalStorage("so-cart", updatedItem);
-    const totalP = document.querySelector(".total-p");
-    totalP.innerHTML = `$${updatedItem.reduce((acc, item) => acc + item.Result.FinalPrice, 0).toFixed(2)}`;
-  
-    //Find the closest .cart-card class to remove it
-    const cartItem = buttonElement.closest(".cart-card");
-  
-    //Removes the whole li element to make cart look updated.
-    if (cartItem) {
-      cartItem.parentNode.removeChild(cartItem);
-    }
+  //This makes sure that the event is not a event bubbling
+  //It looks like that event bubbling is when an event occurs on an element, it also propagates(bubbles up) to its parent elements.
+  //So basicaly, instead of taking the Id of the button, I was getting the Id of li element.
+  const buttonElement = event.target.closest(".remove-button");
+  const itemId = buttonElement.id; //Gets the ID of the button which is the Id of the product.
+
+  //Gets the items from the local storage
+  const storedItem = getLocalStorage("so-cart" || []);
+  console.log(storedItem);
+
+  //Updates the localStorage by removing the object with the Item.Id searched
+  const updatedItem = storedItem.filter((item) => item.Result.Id !== itemId);
+  console.log(updatedItem);
+
+  //Sends the updated version to the localStorage.
+  const test = setLocalStorage("so-cart", updatedItem);
+  const totalP = document.querySelector(".total-p");
+  totalP.innerHTML = `$${updatedItem.reduce((acc, item) => acc + item.Result.FinalPrice, 0).toFixed(2)}`;
+
+  //Find the closest .cart-card class to remove it
+  const cartItem = buttonElement.closest(".cart-card");
+
+  //Removes the whole li element to make cart look updated.
+  if (cartItem) {
+    cartItem.parentNode.removeChild(cartItem);
   }
+}
 
 
 export default class ShoppingCart {
@@ -73,9 +73,9 @@ export default class ShoppingCart {
     }
   }
   cartItemRemove() {
-    
+
   }
-  
+
   updateQty(itemId) {
     const item = getLocalStorage("so-cart").find((item) => item.Result.Id === itemId);
     const itemPrice = parseFloat(item.Result.FinalPrice);
@@ -95,7 +95,7 @@ export default class ShoppingCart {
     const itemId = input.id;
     const item = getLocalStorage("so-cart").find((item) => item.Result.Id === itemId);
     const itemPrice = parseFloat(item.Result.FinalPrice);
-    
+
     const quantity = parseInt(input.value);
 
     const newPrice = itemPrice * quantity;
@@ -124,7 +124,7 @@ export default class ShoppingCart {
     qtyInput.forEach((input) => {
       input.addEventListener("change", this.updateItemPrice.bind(this));
     });
-    
+
   }
-  
+
 }

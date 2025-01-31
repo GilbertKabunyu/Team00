@@ -1,3 +1,4 @@
+import { breadCrumb } from "./breadCrumbs";
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -33,9 +34,6 @@ export function getParams(param) {
   return product
 }
 
-
-
-
 export function renderListWithTemplate(productCardTemplate, parentElement, list, position = "afterbegin", clear = false) {
   if (clear == true) {
     while (parentElement.hasChildNodes()) {
@@ -52,23 +50,28 @@ function renderWithTemplate(template, parentElement, position = "afterbegin", cl
   parentElement.appendChild(newTemplate);
 }
 
-export async function loadHeaderFooter () {
-  const header = document.querySelector('#main-header');
-  const footer = document.querySelector('#main-footer');
+export async function loadHeaderFooter() {
+  const header = document.querySelector("#main-header");
+  const footer = document.querySelector("#main-footer");
+
   const footerPath = "/partials/footer.html";
   const headerPath = "/partials/header.html";
+
   const footerTemplate = await loadTemplate(footerPath);
   const headerTemplate = await loadTemplate(headerPath);
+
   renderWithTemplate(headerTemplate, header);
   renderWithTemplate(footerTemplate, footer);
 
+  breadCrumb();
   searchProducts();
 }
 
-export async function loadTemplate (path) {
+
+export async function loadTemplate(path) {
   const response = await fetch(path);
   const html = await response.text();
-  const template = document.createElement('template');
+  const template = document.createElement("template");
   template.innerHTML = html;
   return template;
 }

@@ -125,6 +125,7 @@ button {
 .cart:hover svg {
   fill: gray;
 }
+
 .cart-count {
   background-color: orange;
   color: white;
@@ -138,6 +139,21 @@ button {
 }
 
 /* End cart icon styles */
+
+.bread-crumbs {
+  padding: 10px;
+  font-family: sans-serif;
+}
+
+.crumb {
+  display: inline-block;
+}
+
+.crumb:not(:last-of-type)::after {
+  content: ">";
+  margin: 0 5px;
+  color: #f0a868;
+}
 
 .mission {
   padding: 0 0.5em;
@@ -259,6 +275,7 @@ button {
   border-radius: 10px;
   font-size: 17px;
 }
+
 /*made a grid for the src/index.html product icons*/
 .product-container {
   display: grid;
@@ -268,18 +285,22 @@ button {
   margin: 0 auto;
   padding: 1rem;
 }
+
 .product-container img {
   width: 100%;
   height: auto;
 }
+
 .product-container p {
   text-align: center;
   margin-top: 0;
 }
+
 .product-container a {
   text-decoration: none;
   color: var(--dark-grey);
 }
+
 .product-container a:hover {
   color: var(--primary-color);
   transform: scale(1.1);
@@ -296,6 +317,7 @@ button {
 .discount-price-p {
   color: var(--secondary-color);
 }
+
 .discount-price-span {
   color: red;
 }
@@ -325,6 +347,7 @@ button {
   border-radius: 5px;
   display: block;
 }
+
 .qty-input:invalid {
   border: 1px solid red;
 }
