@@ -62,9 +62,7 @@ export default class ShoppingCart {
     const totalContainer = document.querySelector(".total-container");
     const emptyCart = document.querySelector(".empty-cart");
     const cartItems = getLocalStorage(this.key);
-    console.log(cartItems);
-    if (cartItems.length >= 1) {
-      console.log(cartItems);  
+    if (cartItems.length >= 1) {  
       const htmlItems = cartItems.map((item) => cartItemTemplate(item));
       document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
       totalP.innerHTML = `$${cartItems.reduce((acc, item) => acc + item.Result.FinalPrice, 0).toFixed(2)}`;
