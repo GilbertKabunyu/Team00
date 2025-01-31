@@ -1,8 +1,8 @@
 import ProductDetails from "./productDetails.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./externalServices.mjs";
 import { getParams, loadHeaderFooter } from "./utils.mjs";
 
-const dataSource = new ProductData();
+const dataSource = new ExternalServices();
 const productId = getParams("product");
 //console.log(dataSource.findProductById(productId));
 

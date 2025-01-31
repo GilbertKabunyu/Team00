@@ -24,50 +24,103 @@
           <legend>Biodata</legend>
           <label for="fname">
             First Name:
-            <input type="text" id="fname" name="fname" placeholder="First Name" required />
+            <input
+              type="text"
+              id="fname"
+              name="fname"
+              placeholder="First Name"
+              required
+            />
           </label>
           <label for="lname">
             Last Name:
-            <input type="text" id="lname" name="lname" placeholder="Last Name" required />
+            <input
+              type="text"
+              id="lname"
+              name="lname"
+              placeholder="Last Name"
+              required
+            />
+          </label>
         </fieldset>
         <fieldset>
           <legend>Address</legend>
-          <label for="street-address">
-            Street Address: 
-            <input type="text" id="street-address" name="street-address" placeholder="Street Address" required/>
+          <label for="street">
+            Street Address:
+            <input
+              type="text"
+              id="street-address"
+              name="street"
+              placeholder="Street Address"
+              required
+            />
           </label>
           <label for="city">
-            City: 
-            <input type="text" id="city" name="city" placeholder="City" required/>
+            City:
+            <input
+              type="text"
+              id="city"
+              name="city"
+              placeholder="City"
+              required
+            />
           </label>
           <label for="state">
-            State: 
-            <input type="text" id="state" name="state" placeholder="State" required />
+            State:
+            <input
+              type="text"
+              id="state"
+              name="state"
+              placeholder="State"
+              required
+            />
           </label>
           <label for="zip">
-            Zip Code: 
-            <input type="text" id="zip" name="zip" placeholder="Zip" required/>
+            Zip Code:
+            <input type="text" id="zip" name="zip" placeholder="Zip" required />
           </label>
         </fieldset>
         <fieldset>
           <legend>Payment Details</legend>
-          <label for="cc-num">
-            Credit Card Number: 
-            <input type="text" id="cc-num" name="cc-num" placeholder="Credit Card Number" required/>
+          <label for="cardNumber">
+            Credit Card Number:
+            <input
+              type="text"
+              id="cc-num"
+              name="cardNumber"
+              placeholder="Credit Card Number"
+              required
+            />
           </label>
-          <label for="cc-exp">
-            Expiration Date: 
-            <input type="text" id="cc-exp" name="cc-exp" placeholder="Expiration Date" required/>
+          <label for="expiration">
+            Expiration Date:
+            <input
+              type="date"
+              id="cc-exp"
+              name="expiration"
+              placeholder="Expiration Date"
+              required
+            />
           </label>
-          <label for="cc-cvv">
-            CVV: 
-            <input type="text" id="cc-cvv" name="cc-cvv" placeholder="CVV" required/>
+          <label for="code">
+            CVV:
+            <input
+              type="text"
+              id="cc-cvv"
+              name="code"
+              placeholder="CVV"
+              required
+            />
           </label>
         </fieldset>
         <button type="submit">Place Order</button>
       </form>
       <section class="order-summary">
         <h3>ORDER SUMMARY</h3>
+        <p class="order-subtotal"></p>
+        <p class="order-tax"></p>
+        <p class="order-shipping"></p>
+        <p class="order-total"></p>
       </section>
     </main>
 

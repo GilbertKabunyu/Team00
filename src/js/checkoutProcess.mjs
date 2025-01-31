@@ -1,4 +1,34 @@
 import { getLocalStorage } from "./utils.mjs";
+import ExternalServices from "./externalServices.mjs";
+
+const dataSource = new ExternalServices();
+
+function packageItems(items) {
+    const simplifiedItems = items.map((item) => {
+        return {
+            id: item.Result.Id,
+            name: item.Result.Name,
+            price: item.Result.FinalPrice,
+            quantity: 1
+        };
+    });
+    return simplifiedItems;
+}
+
+function formDataToJSON(formElement) {
+    const formData = new FormData(formElement);
+    const data = {};
+    formData.forEach(function (value, key) {
+        data[key] = value;
+    });
+    return data;
+}
+
+const exampleItems = getLocalStorage("so-cart");
+console.log(exampleItems);
+const packagedItems = packageItems(exampleItems);
+console.log(packagedItems);
+
 
 export default class CheckoutProcess {
     constructor(key, outputSelector) {
@@ -16,9 +46,9 @@ export default class CheckoutProcess {
     }
     calculateItemSummary() {
         this.itemTotal = this.list.reduce((acc, item) => acc + item.Result.FinalPrice, 0);
-        const subtotal = document.createElement("p");
+        const subtotal = document.querySelector(".order-subtotal");
         subtotal.textContent = `Subtotal: $${this.itemTotal.toFixed(2)} for ${this.list.length} item(s)`;
-        this.outputSelector.appendChild(subtotal);
+        
     }
     calculateOrderTotal() {
         this.shipping = 10 + ((this.list.length-1) * 2);
@@ -27,15 +57,30 @@ export default class CheckoutProcess {
         this.displayOrderTotals();
     }
     displayOrderTotals() {
-        const shipping = document.createElement("p");
+        const shipping = document.querySelector(".order-shipping");
+        const tax = document.querySelector(".order-tax");
+        const total = document.querySelector(".order-total");
         shipping.textContent = `Shipping: $${this.shipping.toFixed(2)}`;
-        this.outputSelector.appendChild(shipping);
-        const tax = document.createElement("p");
         tax.textContent = `Tax: $${this.tax.toFixed(2)}`;
-        this.outputSelector.appendChild(tax);
-        const total = document.createElement("p");
-        total.classList.add("order-total");
         total.textContent = `Total: $${this.orderTotal.toFixed(2)}`;
-        this.outputSelector.appendChild(total);
+    }
+    async checkout() {
+        const formElement = document.querySelector("#checkout-form-id");
+        const json = formDataToJSON(formElement);
+        console.log(json);
+        json.orderDate = new Date();
+        json.orderTotal = this.orderTotal;
+        json.tax = this.tax;
+        json.shipping = this.shipping;
+        json.items = packageItems(this.list);
+
+        try {
+            const response = await dataSource.checkout(json);
+            console.log(response);
+            //alert("Order Submitted");
+        } catch (error) {
+            console.error(error);
+            //alert("Order Failed");
+        }
     }
 }
