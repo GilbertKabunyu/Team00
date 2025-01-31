@@ -24,10 +24,6 @@ function formDataToJSON(formElement) {
     return data;
 }
 
-const exampleItems = getLocalStorage("so-cart");
-console.log(exampleItems);
-const packagedItems = packageItems(exampleItems);
-console.log(packagedItems);
 
 
 export default class CheckoutProcess {
@@ -67,7 +63,6 @@ export default class CheckoutProcess {
     async checkout() {
         const formElement = document.querySelector("#checkout-form-id");
         const json = formDataToJSON(formElement);
-        console.log(json);
         json.orderDate = new Date();
         json.orderTotal = this.orderTotal;
         json.tax = this.tax;
