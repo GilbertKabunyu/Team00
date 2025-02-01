@@ -373,6 +373,92 @@ button {
   padding: 1em 2em;
 }
 
+/* added styling to checkout button */
+.checkout-container {
+  display: flex;
+  justify-content: end;
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+.checkout-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px;
+  margin: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+.checkout-button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* added styles to the checkout form */
+#checkout-form-id {
+  border: 2px solid var(--light-grey);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+#checkout-form-id label {
+  display: block;
+  margin: 1rem;
+}
+#checkout-form-id input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--light-grey);
+}
+#checkout-form-id button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px;
+  width: 100%;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+#checkout-form-id button:hover {
+  background-color: var(--secondary-color);
+}
+#checkout-form-id fieldset legend {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  border-radius: 20px;
+  border-bottom: 2px solid var(--light-grey);
+  border-left: 1px solid var(--light-grey);
+  border-right: 1px solid var(--light-grey);
+}
+#checkout-form-id fieldset {
+  border: 2px solid var(--light-grey);
+  margin: 1rem;
+  border-radius: 10px;
+}
+
+/* added styles to order summary section*/
+.order-summary {
+  border: 2px solid var(--light-grey);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+.order-total {
+  font-weight: bold;
+  color: var(--secondary-color);
+  font-size: 1.5rem;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
