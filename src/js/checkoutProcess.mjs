@@ -1,5 +1,7 @@
 import { getLocalStorage } from "./utils.mjs";
 import ExternalServices from "./externalServices.mjs";
+import { alertMessage } from "./utils.mjs";
+
 
 const dataSource = new ExternalServices();
 
@@ -71,11 +73,17 @@ export default class CheckoutProcess {
 
         try {
             const response = await dataSource.checkout(json);
-            console.log(response);
+            //console.log(response);
             //alert("Order Submitted");
+            window.location.replace("../checkout/success.html");
+            localStorage.removeItem("so-cart");
         } catch (error) {
-            console.error(error);
-            //alert("Order Failed");
+            const alertError = await error;
+            const alertE = await alertError.message;
+            const errorList = Object.values(alertE);
+            for (let a in errorList) {
+                alertMessage(errorList[a]);
+            }
         }
     }
 }

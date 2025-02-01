@@ -29,11 +29,10 @@ function removeCartItem(event) {
 
   //Gets the items from the local storage
   const storedItem = getLocalStorage("so-cart" || []);
-  console.log(storedItem);
 
   //Updates the localStorage by removing the object with the Item.Id searched
   const updatedItem = storedItem.filter((item) => item.Result.Id !== itemId);
-  console.log(updatedItem);
+  
 
   //Sends the updated version to the localStorage.
   const test = setLocalStorage("so-cart", updatedItem);
@@ -62,7 +61,11 @@ export default class ShoppingCart {
     const totalContainer = document.querySelector(".total-container");
     const emptyCart = document.querySelector(".empty-cart");
     const cartItems = getLocalStorage(this.key);
-    if (cartItems.length >= 1) {  
+    if (cartItems == null) {
+        emptyCart.textContent = "You Have No Added Items";
+        totalContainer.style.display = "none";
+        checkoutContainer.style.display = "none";
+    } else if (cartItems.length >= 1) {  
       const htmlItems = cartItems.map((item) => cartItemTemplate(item));
       document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
       totalP.innerHTML = `$${cartItems.reduce((acc, item) => acc + item.Result.FinalPrice, 0).toFixed(2)}`;
@@ -81,7 +84,6 @@ export default class ShoppingCart {
     const itemPrice = parseFloat(item.Result.FinalPrice);
     const itemQty = document.querySelector(`.qty-input[id="${itemId}"]`);
     const quantit = document.querySelectorAll(".qty-input");
-    console.log(itemQty);
     const quantity = parseInt(document.querySelector(".qty-input").value);
     const newPrice = itemPrice * quantity;
     document.querySelector(`.id${itemId}`).textContent = `$${newPrice.toFixed(2)}`;

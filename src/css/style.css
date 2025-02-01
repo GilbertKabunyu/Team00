@@ -459,6 +459,43 @@ button {
   font-size: 1.5rem;
 }
 
+/*Added styles to success.html*/
+.success-footer {
+  position: absolute;
+  bottom: 1rem;
+}
+.success-msg {
+  font-size: 3rem;
+  margin: 0 auto;
+  padding: 1rem;
+  color: #525b0f;
+}
+
+/*Added styles to error alert pop up*/
+.alert {
+  display: flex;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 2px solid black;
+  background-color: #f0a868;
+  
+  
+}
+.alert p, .alert button {
+  background-color: #f0a868;
+  color: black;
+  
+}
+.alert p {
+  padding: 0.8rem;
+  width: 100%;
+}
+.alert button:hover {
+  background-color: #525b0f;
+  color: #d0d0d0;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
