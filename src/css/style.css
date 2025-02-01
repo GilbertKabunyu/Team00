@@ -493,6 +493,33 @@ button {
   background-color: #525b0f;
   color: #d0d0d0;
 }
+/*Animate backpack cart icon*/
+.cart {
+  margin-left: 10px;
+}
+@keyframes iconanimation {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+#cart-icon-id {
+  animation: iconanimation 2s infinite alternate;
+}
+
+.pop-up-box {
+  position: absolute;
+  top: 100px;
+  z-index: 1;
+  border: 2px solid black;
+  max-width: 200px;
+  margin-left: 20px;
+  background-color: #f0a868;
+  padding: 10px;
+}
 
 @media screen and (min-width: 500px) {
   body {

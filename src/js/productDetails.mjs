@@ -25,7 +25,9 @@ export default class ProductDetails {
     const currentCart = getLocalStorage("so-cart") || [];
     currentCart.push(product);
     setLocalStorage("so-cart", currentCart);
-    alertMessage(`You Have Successfully Added ${product.Result.Brand.Name} in Your Cart`)
+    alertMessage(`You Have Successfully Added ${product.Result.Brand.Name} in Your Cart`);
+    const cartIcon = document.querySelector(".cart");
+    cartIcon.id = "cart-icon-id";
   }
 
   renderProductDetails(product) {
