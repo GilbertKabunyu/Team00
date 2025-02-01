@@ -27,6 +27,29 @@ export function removeLocalStorage(key) {
   localStorage.removeItem(key)
 };
 
+export function alertMessage(message, scroll=true) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  const alertMsg = document.createElement("p");
+  alertMsg.textContent = message
+  const alertButton = document.createElement("button");
+  alertButton.textContent = "X"
+  alert.appendChild(alertMsg);
+  alert.appendChild(alertButton);
+  alertButton.classList.add("alert-button")
+  alert.addEventListener("click", (e) => {
+    if (e.target.tagName) {
+      const main = document.querySelector("main")
+      main.removeChild(alert);
+    }
+  })
+  const main = document.querySelector("main");
+  main.prepend(alert);
+  if (scroll) {
+    window.scrollTo(0,0);
+  }
+}
+
 export function getParams(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
