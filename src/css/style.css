@@ -479,13 +479,11 @@ button {
   margin: 0 auto;
   border: 2px solid black;
   background-color: #f0a868;
-  
-  
 }
-.alert p, .alert button {
+.alert p,
+.alert button {
   background-color: #f0a868;
   color: black;
-  
 }
 .alert p {
   padding: 0.8rem;
