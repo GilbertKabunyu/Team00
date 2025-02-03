@@ -105,6 +105,20 @@ button {
   cursor: pointer;
 }
 
+.product-detail__add {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  gap: 10px; /* Space between buttons */
+}
+
+#addToCart, #addToWishlist {
+  padding: 10px 20px; /* Add some padding */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Change cursor on hover */
+  font-size: 16px; /* Font size */
+}
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
