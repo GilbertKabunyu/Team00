@@ -1,4 +1,3 @@
-import ProductDetails from "./productDetails.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
 loadHeaderFooter();
@@ -32,8 +31,5 @@ window.addEventListener("load", () => {
   myFunction();
 });
 
-const shoppingCart = new  shoppingCart("so-cart", ".cart-container", ".remove-button");
+const shoppingCart = new shoppingCart("so-cart", ".cart-container", ".remove-button");
 shoppingCart.init();
-
-const ProductDetails = new ProductDetails(productId, dataSource);
-ProductDetails.init();
