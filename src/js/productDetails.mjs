@@ -20,6 +20,19 @@ export default class ProductDetails {
       .addEventListener('click', () => { this.addProductToCart(this.product) });
   }
 
+  moveToCart(productId) {
+    const currentWishlist = getLocalStorage("wishlist") || [];
+    const productIndex = currentWishlist.findIndex(item => item.Result.Id === productId);
+
+    if (productIndex > -1) {
+      const product = currentWishlist[productIndex];
+      this.addToCart(product); // Reuse the existing addToCart method
+      currentWishlist.splice(productIndex, 1); // Remove from wishlist
+      setLocalStorage("wishlist", currentWishlist);
+      this.renderWishlist(); // Re-render wishlist
+    }
+  }
+
   addProductToCart(product) {
     // product should be an array
     const currentCart = getLocalStorage("so-cart") || [];
@@ -28,6 +41,21 @@ export default class ProductDetails {
     alertMessage(`You Have Successfully Added ${product.Result.Brand.Name} in Your Cart`);
     const cartIcon = document.querySelector(".cart");
     cartIcon.id = "cart-icon-id";
+  }
+
+  addToWishlist(product) {
+    const currentWishlist = getLocalStorage("wishlist") || [];
+
+    const existingProductIndex = currentWishlist.findIndex(item => item.Result.Id === product.Result.Id);
+
+    if (existingProductIndex === -1) {
+      // Add the product to the wishlist
+      currentWishlist.push(product);
+      setLocalStorage("wishlist", currentWishlist);
+      alert("Added to wishlist!");
+    } else {
+      alert("Item already in wishlist!");
+    }
   }
 
   renderProductDetails(product) {
@@ -54,6 +82,7 @@ export default class ProductDetails {
   
         <div class="product-detail__add">
           <button id="addToCart" data-id=${product.Result.Id}>Add to Cart</button>
+           <button id="addToWishlist" data-id=${product.Result.Id}>Add to Wishlist</button>
         </div>
       </section>`
       html.innerHTML = newProduct;
@@ -77,10 +106,15 @@ export default class ProductDetails {
   
         <div class="product-detail__add">
           <button id="addToCart" data-id=${product.Result.Id}>Add to Cart</button>
+          <button id="addToWishlist" data-id=${product.Result.Id}>Add to Wishlist</button>
         </div>
       </section>`
       html.innerHTML = newProduct;
     }
 
+    // Add event listener for wishlist button
+    document.getElementById('addToWishlist').addEventListener('click', () => {
+      this.addToWishlist(product);
+    });
   }
 }

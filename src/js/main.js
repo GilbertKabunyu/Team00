@@ -30,3 +30,6 @@ function myFunction() {
 window.addEventListener("load", () => {
   myFunction();
 });
+
+const shoppingCart = new shoppingCart("so-cart", ".cart-container", ".remove-button");
+shoppingCart.init();
